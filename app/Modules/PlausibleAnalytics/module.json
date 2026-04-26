@@ -1,0 +1,10 @@
+{
+    "name": "PlausibleAnalytics",
+    "version": "1.0.0",
+    "description": "Plausible Analytics — privacy-first web analytics (cloud or self-hosted)",
+    "authors": ["Flute CMS"],
+    "providers": ["Flute\\Modules\\PlausibleAnalytics\\Providers\\PlausibleAnalyticsProvider"],
+    "dependencies": {
+        "flute": ">=1.0.0"
+    }
+}
