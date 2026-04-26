@@ -2,7 +2,7 @@
 
 Модуль подключает [Plausible Analytics](https://plausible.io/) (облако или self-hosted) к сайту на **Flute CMS**: вставка сниппета в `<head>`, настройки в админке, учёт Content-Security-Policy.
 
-**Версия модуля:** см. `app/Modules/PlausibleAnalytics/module.json` (текущий релиз: **1.0.0**).
+**Версия модуля:** см. `PlausibleAnalytics/module.json` (текущий релиз: **1.0.0**).
 
 ## Требования
 
@@ -11,23 +11,29 @@
 
 ## Установка
 
-1. Скопируйте каталог модуля в проект Flute:
+В корне репозитория лежит каталог **`PlausibleAnalytics/`** — это сам модуль. Его нужно положить во Flute так:
 
-   ```
-   <корень Flute>/app/Modules/PlausibleAnalytics/
-   ```
+```
+<корень Flute>/app/Modules/PlausibleAnalytics/
+```
 
-   То есть структура репозитория повторяет путь внутри CMS: `app/Modules/PlausibleAnalytics/...`.
+Пример (PowerShell из корня Flute):
 
-2. Установите модуль через стандартный механизм Flute (Modules / установщик), чтобы создалось право **`admin.plausible`**.
+```powershell
+Copy-Item -Path ".\PlausibleAnalytics" -Destination ".\app\Modules\PlausibleAnalytics" -Recurse
+```
 
-3. Назначьте право **`admin.plausible`** нужным ролям в админ-панели (и при необходимости **`admin`** — см. пакет модуля).
+(путь к исходной папке укажите откуда клонировали этот репозиторий.)
 
-4. Откройте **Админка → Plausible Analytics** (`/admin/plausible-analytics`), вставьте готовый сниппет из Plausible и включите трекинг.
+Дальше:
+
+1. Установите модуль через стандартный механизм Flute (Modules / установщик), чтобы создалось право **`admin.plausible`**.
+2. Назначьте право **`admin.plausible`** нужным ролям (и при необходимости **`admin`** — см. пакет модуля).
+3. Откройте **Админка → Plausible Analytics** (`/admin/plausible-analytics`), вставьте сниппет из Plausible и включите трекинг.
 
 ## Настройка
 
-Файл конфигурации по умолчанию: `Resources/config/plausible.php`.
+Внутри установленного модуля конфиг по умолчанию: `Resources/config/plausible.php` (относительно `app/Modules/PlausibleAnalytics/`).
 
 | Параметр | Описание |
 |----------|-----------|
@@ -54,21 +60,24 @@
 
 ## Релизы
 
-См. [Releases](https://github.com/obfuskation/PlausibleAnalytics/releases). Версия в Git должна совпадать с полем `version` в `module.json`.
+См. [Releases](https://github.com/obfuskation/PlausibleAnalytics/releases). Версия в Git должна совпадать с полем `version` в `PlausibleAnalytics/module.json`.
 
-## Структура модуля
+## Структура репозитория
 
 ```
-app/Modules/PlausibleAnalytics/
-├── module.json
-├── Installer.php
-├── Admin/Package/          # экран настроек, маршруты, пункт меню
-├── Listeners/              # CSP на ответе
-├── Providers/              # сервис-провайдер модуля
-├── Resources/
-│   ├── config/plausible.php
-│   └── lang/{en,ru}/plausible.php
-└── Support/                # условия внедрения и разбор origin из сниппета
+.
+├── README.md
+├── .gitignore
+└── PlausibleAnalytics/     # скопировать в app/Modules/PlausibleAnalytics во Flute
+    ├── module.json
+    ├── Installer.php
+    ├── Admin/Package/
+    ├── Listeners/
+    ├── Providers/
+    ├── Resources/
+    │   ├── config/plausible.php
+    │   └── lang/{en,ru}/plausible.php
+    └── Support/
 ```
 
 ## Лицензия
@@ -79,4 +88,4 @@ app/Modules/PlausibleAnalytics/
 
 ## PlausibleAnalytics — Flute CMS module (English)
 
-This repository mirrors the path under a Flute project: copy `app/Modules/PlausibleAnalytics` into your Flute root. Configure the snippet and toggles in **Admin → Plausible Analytics**. See branch and release notes above.
+The **`PlausibleAnalytics/`** directory at the repo root is the module. Copy it to `<Flute root>/app/Modules/PlausibleAnalytics/`, then install and configure in **Admin → Plausible Analytics**. Branching and releases are described above.
